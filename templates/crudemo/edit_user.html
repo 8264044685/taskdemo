@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+    
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <h1 style="text-align: center;">User Profile</h1>
+<div class="form-row">
+    <div class="form-group col-md-6">
+        <label >Name</label>
+        <input type="text" name="name"  class="form-control" required value="{% if user_datail.name %}{{user_datail.name}}{%else%}{% endif %}">
+    </div>
+    <div class="form-group col-md-6">
+        <label >Email</label>
+        <input type="text" name="email"  class="form-control" required id="inputPassword4" value="{% if user_datail.email %}{{user_datail.email}}{%else%}{% endif %}">
+    </div>
+    </div>
+        <div class="form-group">
+        <label for="inputAddress">Address</label>
+        <input type="text" name="address"  class="form-control" required id="inputAddress" value="{% if user_datail.address %}{{user_datail.address}}{%else%}{% endif %}">
+    </div>
+    <div class="form-group">
+        <label for="inputAddress2">Address 2</label>
+        <input type="text" name="address2"  class="form-control" required id="inputAddress2" value="{% if user_datail.address2 %}{{user_datail.address2}}{%else%}{% endif %}">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+        <label for="inputCity">City</label>
+        <input type="text" name="city"  class="form-control" required id="inputCity" value="{% if user_datail.city %}{{user_datail.city}}{%else%}{% endif %}">
+    </div>
+    <div class="form-group col-md-4">
+        <label for="inputState">State</label>
+        <input type="text" name="state"  class="form-control" required id="inputState" value="{% if user_datail.state %}{{user_datail.state}}{%else%}{% endif %}">
+    </div>
+    <div class="form-group col-md-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" name="zipcode"  class="form-control" required id="inputZip" value="{% if user_datail.zipcode %}{{user_datail.zipcode}}{%else%}{% endif %}">
+    </div>
+    </div>
+    <input type="submit"   class="btn btn-primary" value="Submit">
+</form>
+{% endblock %}

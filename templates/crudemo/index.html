@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .bs-example{
+        margin-left: 30px;
+    }
+</style>
+
+
+  <table id="example" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Address2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zipcode</th>
+            <th>Status</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in users_details %}
+        <tr>
+            <td>{{data.name}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.address}}</td>
+            <td>{{data.address2}}</td>
+            <td>{{data.city}}</td>
+            <td>{{data.state}}</td>
+            <td>{{data.zipcode}}</td>
+            <td>
+                <div class="bs-example">
+                    <form method="POST">{% csrf_token %}
+                        <div class="custom-control custom-switch">
+                            <input data-id='{{data.id}}' data-status-url='{% url 'user_status' %}' data-user-status='{{data.status}}' name="status"  type="checkbox" {% if data.status == 'active' %}checked{% endif %} class="custom-control-input" id="customSwitch1_{{data.id}}">
+                            <label class="custom-control-label" for="customSwitch1_{{data.id}}"></label>
+                        </div>
+                    </form>
+            </td>
+            <td>
+                <a href="{% url 'view_user' id=data.id %}"><i class="fa fa-eye" ></i></a>
+                <a href="{% url 'edit_user' id=data.id %}"><i class="fa fa-edit" ></i></a>
+                <a href="{% url 'delete_user' id=data.id %}"><i class="fa fa-trash" ></i></a>
+
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Address2</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Zipcode</th>
+            <th>Status</th>
+            <th>Options</th>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+
+{% endblock %}
